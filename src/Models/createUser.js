@@ -1,3 +1,4 @@
+const { ObjectId } = require('bson');
 const connection = require('./connection');
 
 const createUser = async ({
@@ -17,7 +18,14 @@ const createUser = async ({
       role
     });
 
-    return { user: user.ops[0] }
+    return { user: { 
+      firstName,
+      lastName,
+      birthdate,
+      addresses,
+      role,
+      _id: ObjectId(user._id).toString()
+    } }
 
   } catch(error) { 
       console.error("createUser", error.message);
