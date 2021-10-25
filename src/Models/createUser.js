@@ -6,15 +6,17 @@ const createUser = async ({
   lastName,
   birthdate,
   addresses,
+  email,
   role = "user"
 }) => {
   try {
     const db = await connection();
-    const user = await db.collection("users").insertOne({ 
+    const userCreated = await db.collection("users").insertOne({ 
       firstName,
       lastName,
       birthdate,
       addresses,
+      email,
       role
     });
 
@@ -23,8 +25,9 @@ const createUser = async ({
       lastName,
       birthdate,
       addresses,
+      email,
       role,
-      _id: ObjectId(user._id).toString()
+      _id: ObjectId(userCreated._id).toString()
     } }
 
   } catch(error) { 
